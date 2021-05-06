@@ -3,6 +3,9 @@ version: 2
 models:
   - name: orders
     description: One record per customer come along with order and total order amount
+    tests:
+      - unique:
+          column_name: "customer_id || '-' || order_id"
     columns:
       - name: customer_id
         tests:
@@ -12,7 +15,8 @@ models:
       - name: amount
         description: total order amount
         tests:
-          - not_null
+          - not_null:
+              severity: WARN
 
   - name: customers
     description: One record per customer
