@@ -23,8 +23,8 @@ final as (
         customers.customer_id,
         sum(payments.amount) as amount
     from customers
-        left join orders on customers.customer_id = orders.customer_id
-        left join payments on orders.order_id = payments.orderid
+        inner join orders on customers.customer_id = orders.customer_id
+        inner join payments on orders.order_id = payments.orderid
     group by payments.orderid,
         customers.customer_id
 )
