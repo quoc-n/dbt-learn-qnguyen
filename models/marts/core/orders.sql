@@ -19,13 +19,13 @@ payments as (
 final as (
 
     select
-        payments.orderid as order_id,
+        payments.order_id as order_id,
         customers.customer_id,
-        sum(payments.amount) as amount
+        sum(payments.amount_usd) as amount
     from customers
-        left join orders on customers.customer_id = orders.customer_id
-        left join payments on orders.order_id = payments.orderid
-    group by payments.orderid,
+        inner join orders on customers.customer_id = orders.customer_id
+        inner join payments on orders.order_id = payments.order_id
+    group by payments.order_id,
         customers.customer_id
 )
 
